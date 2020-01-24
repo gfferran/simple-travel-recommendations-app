@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block subtitle %}
+  {{ subtitle }}
+{% endblock %}
+
+{% block main %}
+<div class="alert alert" role="alert">
+  <p style="color:Gray;">{{ additional_text }}</p>
+ <table class="table table-striped" style="table-layout:auto; width=50%;">
+        <thead class="thead">
+          <tr style="background-color:White;">
+            <th>Place</th>
+            {% if places[0]["distance"] %}<th>Distance</th> {% endif %}
+            <th>Rating</th>
+            <th>My rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for place in places %}
+          <tr>
+            <td align="left"><strong>{{ place["placename"] }}</strong>{% if list_type=="ratings"%} &nbsp;({{place["country"] }}){% endif %}</td>
+             {% if place["distance"] %} <td>{{ place["distance"] }} km</td> {% endif %}
+            <td>{% if place["ratings_avg"] == NULL or place["ratings_avg"] == 0 %}N/A{% else %}{{ "%0.2f"|format(place["ratings_avg"]) }} <small>({{ "%.0f"|format(place["ratings_num"]) }})</small> {% endif %}</td>
+            <td>
+              <form style="display:inline;" action="/rate" method="post">
+              <input type="hidden" name="place_id" value={{ place["place_id"] }} />
+                <select class="form-control form-control-sm" id="rating" name="rating">
+                {% if place["my_rating"] %}
+                <option hidden>{{ "%.0f"|format(place["my_rating"]) }}</option>
+                {% else %}
+                <option hidden> -- </option>
+                {% endif %}
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+              &nbsp;
+              <button type="submit" class="btn btn-outline-success btn-sm" size="10" style="height:2em;">Rate</button>
+            </form>
+              {% if list_type == "ratings" %}
+              &nbsp;
+                <form style="display:inline;" id="delete_rating" name="delete_rating" action="/delete_rating" method="post">
+                  <input type="hidden" name="place_id" value={{ place["place_id"] }} />
+                  <button type="submit" class="btn btn-outline-danger btn-sm" size="10" style="height:2em;">Delete rating</button>
+                </form>
+               {% endif %}
+
+
+
+            </td>
+          </tr>
+          <tr>
+            <td align="left" colspan="3" style="padding-left: 40px;">
+              {% if not place["description"] %}<i style="color:Gray;">No description available.</i>{% else %}{{ place["description"] }}{% endif %}
+            <br />
+            <a target="_blank" href="http://www.google.com/search?q={{ place["placename"] }}">More info</a> / <a target="_blank" href="https://www.google.com/maps/search/?api=1&query={{ place["latitude"] }},{{ place["longitude"] }}">Google Maps</a> / <a target="_blank" href="https://bing.com/maps/default.aspx?cp={{ place["latitude"] }}~{{ place["longitude"] }}">Bing Maps</a>
+            </td>
+          </tr>
+          {% endfor %}
+          </tbody>
+ </table>
+ <hr />
+    <small>Need help? <a href="mailto:help@theocean.com">Contact us</a>!</small>
+</div>
+
+{% endblock %}

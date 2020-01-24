@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+       Where next?
+{% endblock %}
+
+{% block main %}
+
+<div align="center">
+
+<!-- <div class="img" align="center"><img src="/static/main_img.jpg" width=50% style="padding-bottom: 10px;" /></div> -->
+<!-- Get location buttons -->
+
+    <div class="jumbotron" style="padding: 2rem; vertical-align: center; width: 50%;">
+
+        <h5 style="font-weight:400;">Find cool places near you!</h1>
+        <a class="btn btn-successbtn btn-success" href="/nearby" role="button">Show me what's around me</a>
+    </div>
+
+<!-- Or introduce coordinates -->
+
+<!-- http://getbootstrap.com/docs/4.1/components/forms/ -->
+    <!-- <div class="jumbotron" style="padding: 2rem;">
+        <h5 style="font-weight:400;" style="line-height: 10.5;">...or teleport yourself to a specific place:</h1>
+        <form action="/next" method="post">
+            <div class="form-group">
+                <input autocomplete="off" class="form-control" name="latitude"  placeholder="Latitude"  type="text">
+                <input autocomplete="off" class="form-control" name="longitude" placeholder="Longitude" type="text">
+            </div>
+            <button class="btn btn-successbtn btn-success" type="submit">What's around me</button>
+        </form>
+    </div> -->
+
+</div>
+
+{% endblock %}

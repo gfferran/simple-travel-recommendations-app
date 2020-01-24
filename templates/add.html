@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add a new place
+{% endblock %}
+
+{% block subtitle %}
+    Add a new place
+{% endblock %}
+
+{% block main %}
+
+<div class="container" align="center" style="text-align: left; padding-left: 15%;">
+<form action="/add" method="post">
+  <div class="form-group row">
+    <label for="placename" class="col-sm-2 col-form-label">Name</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" id="placename" name="placename" placeholder="Name of the place">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="latitude" class="col-sm-2 col-form-label">Latitude</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="latitude" name="latitude" placeholder="Latitude">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="longitude" class="col-sm-2 col-form-label">Longitude</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="longitude" name="longitude" placeholder="Longitude">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="country" class="col-sm-2 col-form-label">Country</label>
+    <div class="col-sm-10">
+        <select name="country" class="selectpicker countrypicker"></select>
+    </div>
+  </div>
+  <div class="form-group">
+      <label for="description" class"col-sm-2 col-form-label">Description</label><br />
+      <textarea class="form-control" name="description" placeholder="Describe this place (min: 5 words)." type="text" rows="3" style="min-width: 100%"></textarea>
+    </div>
+
+<div align="center">
+    <button class="btn btn-success" type="submit">Add</button>
+</div>
+</form>
+</div>
+<hr />
+<small>Need help? <a href="mailto:help@theocean.com">Contact us</a>!</small>
+
+{% endblock %}
