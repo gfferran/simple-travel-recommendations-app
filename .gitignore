@@ -1,0 +1,8 @@
+*.zip
+*.rar
+*.png
+*.jpg
+*.jpeg
+*.gif
+/__pycache__/
+*.db
